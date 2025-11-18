@@ -11,120 +11,82 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace importa;
 
-// El modelo y las columnas se mapearán en minúscula en la base de datos
 [Table("assignacions")]
 public class AssignacioRaw
 {
-    [Column("id")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Key]
     public int Id { get; set; }
     
-    [Column("curs")]
     public string? Curs { get; set; }
     
-    [Column("any")]
     public string? Any { get; set; }
     
-    [Column("codi_centre")]
     public string? CodiCentre { get; set; }
     
-    [Column("denominacio_completa")]
-    public string? DenominacioCompleta { get; set; }
+    public string? DenominacióCompleta { get; set; }
     
-    [Column("codi_naturalesa")]
     public string? CodiNaturalesa { get; set; }
     
-    [Column("nom_naturalesa")]
     public string? NomNaturalesa { get; set; }
     
-    [Column("codi_titularitat")]
     public string? CodiTitularitat { get; set; }
     
-    [Column("nom_titularitat")]
     public string? NomTitularitat { get; set; }
     
-    [Column("codi_area_territorial")]
-    public string? CodiAreaTerritorial { get; set; }
+    public string? CodiÀreaTerritorial { get; set; }
     
-    [Column("nom_area_territorial")]
-    public string? NomAreaTerritorial { get; set; }
+    public string? NomÀreaTerritorial { get; set; }
     
-    [Column("codi_comarca")]
     public string? CodiComarca { get; set; }
     
-    [Column("nom_comarca")]
     public string? NomComarca { get; set; }
     
-    [Column("codi_municipi_5")]
     public string? CodiMunicipi5 { get; set; }
     
-    [Column("codi_municipi_6")]
     public string? CodiMunicipi6 { get; set; }
     
-    [Column("nom_municipi")]
     public string? NomMunicipi { get; set; }
     
-    [Column("coordenades_utm_x")]
     public double? CoordenadesUtmX { get; set; }
     
-    [Column("coordenades_utm_y")]
     public double? CoordenadesUtmY { get; set; }
     
-    [Column("longitud")]
     public double? Longitud { get; set; }
     
-    [Column("latitud")]
     public double? Latitud { get; set; }
     
-    [Column("convocatoria")]
-    public string? Convocatoria { get; set; }
+    public string? Convocatòria { get; set; }
     
-    [Column("nom_ensenyament")]
     public string? NomEnsenyament { get; set; }
     
-    [Column("regim")]
-    public string? Regim { get; set; }
+    public string? Règim { get; set; }
     
-    [Column("torn")]
     public string? Torn { get; set; }
     
-    [Column("nivell")]
     public int? Nivell { get; set; }
     
-    [Column("nombre_grups")]
     public int? NombreGrups { get; set; }
     
-    [Column("nombre_places")]
     public int? NombrePlaces { get; set; }
     
-    [Column("places_ofertades_preinscripcio")]
     public int? PlacesOfertadesPreinscripcio { get; set; }
     
-    [Column("assignacions")]
     public int? Assignacions { get; set; }
     
-    [Column("assignacions_1a_peticio")]
     public int? Assignacions1aPeticio { get; set; }
     
-    [Column("assignacions_altres_peticions")]
     public int? AssignacionsAltresPeticions { get; set; }
     
-    [Column("places_ofertades_preinscripcio_2a_volta")]
     public int? PlacesOfertadesPreinscripcio2aVolta { get; set; }
     
-    [Column("assignacions_2a_volta")]
     public int? Assignacions2aVolta { get; set; }
     
-    [Column("assignacions_1a_peticio_2a_volta")]
     public int? Assignacions1aPeticio2aVolta { get; set; }
     
-    [Column("assignacions_altres_peticions_2a_volta")]
     public int? AssignacionsAltresPeticions2aVolta { get; set; }
     
-    [Column("georeferenciacio_longitud")]
     public double? GeoreferenciacionLongitud { get; set; }
     
-    [Column("georeferenciacio_latitud")]
     public double? GeoreferenciacionLatitud { get; set; }
 }

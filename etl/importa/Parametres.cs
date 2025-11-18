@@ -8,7 +8,8 @@ public class Parametres
     public const string POSTGRES = "postgres";
     public const string MYSQL = "mysql";
     public const string SQLSERVER = "sqlserver";
-    public const string FitxerCSV = "Data/Estadística_de_l'assignació_de_places_en_el_procés_de_la_preinscripció_en_els_ensenyaments_post-obligatoris_20251118.csv";
+    public const string INMEMORY = "inmemory";
+    public const string FitxerCSV = "Data/data.csv";
 
     public static string DbBrandParam =>
         (Environment.GetEnvironmentVariable("DbBrandParam") ?? POSTGRES).Trim().ToLowerInvariant();
@@ -26,6 +27,7 @@ public class Parametres
                 POSTGRES => "Host=postgres;Port=5432;Username=postgres;Password=123456;Database=assignacions",
                 MYSQL => "Server=mysql;Port=3306;User=root;Password=123456;Database=assignacions",
                 SQLSERVER => "Server=sqlserver,1433;User Id=sa;Password=Str0ngPass!;TrustServerCertificate=True;Database=assignacions",
+                INMEMORY => "InMemoryForTestPurposes",
                 _ => "Host=postgres;Port=5432;Username=postgres;Password=123456;Database=assignacions"
             };
         }

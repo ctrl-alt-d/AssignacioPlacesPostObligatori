@@ -22,13 +22,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\importa\importa.csproj" />
+    <ProjectReference Include="../importa/importa.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="..Data\Estadística_de_l'assignació_de_places_en_el_procés_de_la_preinscripció_en_els_ensenyaments_post-obligatoris_20251118.csv">
+    <Content Include="../../Data/data.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+      <Link>Data\data.csv</Link>
+    </Content>
   </ItemGroup>
 
 </Project>

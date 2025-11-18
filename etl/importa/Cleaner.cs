@@ -8,7 +8,7 @@ public class Cleaner
     {
 
         // Aplicar limpieza para campos string con valores inválidos
-        CleanStringField(assignacions, a => a.DenominacioCompleta, (a, v) => a.DenominacioCompleta = v);
+        // CleanStringField(assignacions, a => a.DenominacioCompleta, (a, v) => a.DenominacioCompleta = v);
 
     }
 

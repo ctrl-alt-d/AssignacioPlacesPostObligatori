@@ -7,13 +7,13 @@ namespace importa;
 public class Orquestrador
 {
     protected CSVReader reader;
-    protected IAssignacionsDbCtx context;
+    protected AssignacionsDbCtx context;
     protected Cleaner cleaner;
     protected Normalitzador normalitzador;
     protected string rutaFitxer;
     protected ILogger<Orquestrador> logger;
 
-    public Orquestrador(CSVReader reader, Cleaner cleaner, IAssignacionsDbCtx context, Normalitzador normalitzador, string rutaFitxer, ILogger<Orquestrador> logger)
+    public Orquestrador(CSVReader reader, Cleaner cleaner, AssignacionsDbCtx context, Normalitzador normalitzador, string rutaFitxer, ILogger<Orquestrador> logger)
     {
         this.reader = reader;
         this.cleaner = cleaner;

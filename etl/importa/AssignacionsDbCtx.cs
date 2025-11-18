@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace importa;
 
-public class AssignacionsDbCtx : DbContext, IAssignacionsDbCtx
+public class AssignacionsDbCtx : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -17,6 +17,9 @@ public class AssignacionsDbCtx : DbContext, IAssignacionsDbCtx
                 break;
             case Parametres.SQLSERVER:
                 optionsBuilder.UseSqlServer(Parametres.ConnectionStringParam);
+                break;
+            case Parametres.INMEMORY:
+                optionsBuilder.UseSqlite("Filename=:memory:");
                 break;
             default:
                 var msg = $"El tipus de base de dades '{Parametres.DbBrandParam}' no és compatible, vols afegir-lo? https://github.com/ctrl-alt-d/AssignacionsAmbAssignacions";
@@ -46,7 +49,10 @@ public class AssignacionsDbCtx : DbContext, IAssignacionsDbCtx
 
     public void RecreateDatabase()
     {
-        this.Database.EnsureDeleted();
+        if (Parametres.DbBrandParam != Parametres.INMEMORY)
+        {
+            this.Database.EnsureDeleted();
+        }
         this.Database.EnsureCreated();
     }
     

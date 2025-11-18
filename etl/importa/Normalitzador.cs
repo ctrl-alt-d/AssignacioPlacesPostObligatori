@@ -2,8 +2,8 @@ namespace importa;
 
 public class Normalitzador
 {
-    private IAssignacionsDbCtx context;
-    public Normalitzador(IAssignacionsDbCtx context)
+    private AssignacionsDbCtx context;
+    public Normalitzador(AssignacionsDbCtx context)
     {
         this.context = context;
     }
@@ -30,19 +30,19 @@ public class Normalitzador
             .ToList();
         
         var areesTerritorials = raw_data
-            .Where(r => !string.IsNullOrEmpty(r.CodiAreaTerritorial) && !string.IsNullOrEmpty(r.NomAreaTerritorial))
-            .GroupBy(r => r.CodiAreaTerritorial)
-            .Select(g => new AreaTerritorial { Codi = g.Key!, Nom = g.First().NomAreaTerritorial! })
+            .Where(r => !string.IsNullOrEmpty(r.CodiÀreaTerritorial) && !string.IsNullOrEmpty(r.NomÀreaTerritorial))
+            .GroupBy(r => r.CodiÀreaTerritorial)
+            .Select(g => new AreaTerritorial { Codi = g.Key!, Nom = g.First().NomÀreaTerritorial! })
             .ToList();
         
         var comarques = raw_data
-            .Where(r => !string.IsNullOrEmpty(r.CodiComarca) && !string.IsNullOrEmpty(r.NomComarca) && !string.IsNullOrEmpty(r.CodiAreaTerritorial))
+            .Where(r => !string.IsNullOrEmpty(r.CodiComarca) && !string.IsNullOrEmpty(r.NomComarca) && !string.IsNullOrEmpty(r.CodiÀreaTerritorial))
             .GroupBy(r => r.CodiComarca)
             .Select(g => new Comarca 
             { 
                 Codi = g.Key!, 
                 Nom = g.First().NomComarca!, 
-                CodiAreaTerritorial = g.First().CodiAreaTerritorial! 
+                CodiAreaTerritorial = g.First().CodiÀreaTerritorial! 
             })
             .ToList();
         
@@ -59,14 +59,14 @@ public class Normalitzador
             .ToList();
         
         var centres = raw_data
-            .Where(r => !string.IsNullOrEmpty(r.CodiCentre) && !string.IsNullOrEmpty(r.DenominacioCompleta) 
+            .Where(r => !string.IsNullOrEmpty(r.CodiCentre) && !string.IsNullOrEmpty(r.DenominacióCompleta) 
                 && !string.IsNullOrEmpty(r.CodiNaturalesa) && !string.IsNullOrEmpty(r.CodiTitularitat) 
                 && !string.IsNullOrEmpty(r.CodiMunicipi5))
             .GroupBy(r => r.CodiCentre)
             .Select(g => new Centre 
             { 
                 Codi = g.Key!, 
-                DenominacioCompleta = g.First().DenominacioCompleta!, 
+                DenominacioCompleta = g.First().DenominacióCompleta!, 
                 CodiNaturalesa = g.First().CodiNaturalesa!, 
                 CodiTitularitat = g.First().CodiTitularitat!, 
                 CodiMunicipi5 = g.First().CodiMunicipi5!,
@@ -78,8 +78,8 @@ public class Normalitzador
             .ToList();
         
         var convocatories = raw_data
-            .Where(r => !string.IsNullOrEmpty(r.Convocatoria))
-            .Select(r => r.Convocatoria!)
+            .Where(r => !string.IsNullOrEmpty(r.Convocatòria))
+            .Select(r => r.Convocatòria!)
             .Distinct()
             .Select(nom => new Convocatoria { Nom = nom })
             .ToList();
@@ -92,8 +92,8 @@ public class Normalitzador
             .ToList();
         
         var regims = raw_data
-            .Where(r => !string.IsNullOrEmpty(r.Regim))
-            .Select(r => r.Regim!)
+            .Where(r => !string.IsNullOrEmpty(r.Règim))
+            .Select(r => r.Règim!)
             .Distinct()
             .Select(nom => new Regim { Nom = nom })
             .ToList();
@@ -126,6 +126,8 @@ public class Normalitzador
         context.SaveChanges();
 
         // Create lookup dictionaries for foreign key resolution
+        var xx = context.Convocatories.ToList();
+
         var convocatoriaDict = context.Set<Convocatoria>().ToDictionary(c => c.Nom, c => c.Id);
         var ensenyamentDict = context.Set<Ensenyament>().ToDictionary(e => e.Nom, e => e.Id);
         var regimDict = context.Set<Regim>().ToDictionary(r => r.Nom, r => r.Id);
@@ -134,15 +136,15 @@ public class Normalitzador
         // Create assignacions (fact table)
         var assignacions = raw_data
             .Where(r => !string.IsNullOrEmpty(r.CodiCentre) && !string.IsNullOrEmpty(r.Any)
-                && !string.IsNullOrEmpty(r.Convocatoria) && !string.IsNullOrEmpty(r.NomEnsenyament)
-                && !string.IsNullOrEmpty(r.Regim) && !string.IsNullOrEmpty(r.Torn))
+                && !string.IsNullOrEmpty(r.Convocatòria) && !string.IsNullOrEmpty(r.NomEnsenyament)
+                && !string.IsNullOrEmpty(r.Règim) && !string.IsNullOrEmpty(r.Torn))
             .Select(r => new Assignacio
             {
                 CodiCentre = r.CodiCentre!,
                 Any = r.Any!,
-                ConvocatoriaId = convocatoriaDict[r.Convocatoria!],
+                ConvocatoriaId = convocatoriaDict[r.Convocatòria!],
                 EnsenyamentId = ensenyamentDict[r.NomEnsenyament!],
-                RegimId = regimDict[r.Regim!],
+                RegimId = regimDict[r.Règim!],
                 TornId = tornDict[r.Torn!],
                 Nivell = r.Nivell,
                 NombreGrups = r.NombreGrups,
