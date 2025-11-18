@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace importa;
 
-public class AssignacionsDbCtx : DbContext
+public class AssignacionsDbCtx : DbContext, IAssignacionsDbCtx
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -43,5 +43,11 @@ public class AssignacionsDbCtx : DbContext
     public DbSet<Regim> Regims { get; set; } = null!;
     public DbSet<Torn> Torns { get; set; } = null!;
     public DbSet<Assignacio> Assignacions { get; set; } = null!;
+
+    public void RecreateDatabase()
+    {
+        this.Database.EnsureDeleted();
+        this.Database.EnsureCreated();
+    }
     
 }

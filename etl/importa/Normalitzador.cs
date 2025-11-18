@@ -2,8 +2,8 @@ namespace importa;
 
 public class Normalitzador
 {
-    private AssignacionsDbCtx context;
-    public Normalitzador(AssignacionsDbCtx context)
+    private IAssignacionsDbCtx context;
+    public Normalitzador(IAssignacionsDbCtx context)
     {
         this.context = context;
     }

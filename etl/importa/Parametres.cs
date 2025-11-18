@@ -8,7 +8,7 @@ public class Parametres
     public const string POSTGRES = "postgres";
     public const string MYSQL = "mysql";
     public const string SQLSERVER = "sqlserver";
-    public const string FitxerCSV = "Data/Assignacions_de_tr_nsit_amb_morts_o_ferits_greus_a_Catalunya.csv";
+    public const string FitxerCSV = "Data/Estadística_de_l'assignació_de_places_en_el_procés_de_la_preinscripció_en_els_ensenyaments_post-obligatoris_20251118.csv";
 
     public static string DbBrandParam =>
         (Environment.GetEnvironmentVariable("DbBrandParam") ?? POSTGRES).Trim().ToLowerInvariant();

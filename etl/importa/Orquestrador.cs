@@ -7,13 +7,13 @@ namespace importa;
 public class Orquestrador
 {
     protected CSVReader reader;
-    protected AssignacionsDbCtx context;
+    protected IAssignacionsDbCtx context;
     protected Cleaner cleaner;
     protected Normalitzador normalitzador;
     protected string rutaFitxer;
     protected ILogger<Orquestrador> logger;
 
-    public Orquestrador(CSVReader reader, Cleaner cleaner, AssignacionsDbCtx context, Normalitzador normalitzador, string rutaFitxer, ILogger<Orquestrador> logger)
+    public Orquestrador(CSVReader reader, Cleaner cleaner, IAssignacionsDbCtx context, Normalitzador normalitzador, string rutaFitxer, ILogger<Orquestrador> logger)
     {
         this.reader = reader;
         this.cleaner = cleaner;
@@ -41,8 +41,7 @@ public class Orquestrador
 
         // Crear la base de dades i la taula
         logger.LogInformation("Recreant la base de dades i la taula ...");
-        context.Database.EnsureDeleted();
-        context.Database.EnsureCreated();
+        context.RecreateDatabase();
 
         logger.LogInformation("Inserint les dades a la base de dades...");
         // Inserir les dades a la base de dades
